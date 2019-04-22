@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 
-	<bean id="user" class="spring_project_userinfo.User"
-		scope="prototype">
-		
-	<constructor-arg name="first_name" value="alex" type="String"></constructor-arg>
-	<constructor-arg name="last_name" value="nunez" type="String"></constructor-arg>
-	<constructor-arg name="age" value="23" type="int"></constructor-arg>
+	
+	<context:property-placeholder
+		location="spring_project_userinfor/props/jdbc.properties" />
+	
+	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+	<property name="driverClassName" value="${jdbc.driver}"></property>
+	<property name="url" value="${jdbc.url}"></property>
+	<property name="username" value="${jdbc.username}"></property>
+	<property name="password" value="${jdbc.password}"></property>
 	</bean>
+	<context:component-scan base-package="spring_project_userinfo"></context:component-scan>
 </beans>
