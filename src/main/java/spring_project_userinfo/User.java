@@ -5,6 +5,16 @@ public class User
 	private String first_name;
 	private String last_name;
 	private int age;
+	public User()
+	{
+		
+	}
+	public User(String first_name, String last_name, int age) {
+		super();
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.age = age;
+	}
 	public String getFirst_name() {
 		return first_name;
 	}
